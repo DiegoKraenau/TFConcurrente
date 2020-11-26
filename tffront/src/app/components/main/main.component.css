@@ -1,5 +1,4 @@
 
-
 body{
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     background: #fff;
@@ -12,7 +11,7 @@ html{
 
 header{
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2af 100%);
     text-align: center;
     overflow: hidden;
@@ -22,7 +21,15 @@ header{
 
 .img{
     width: 400px;
-    margin-top: 200px;
+    height: 400px;
+    margin-top: 60px;
+
+}
+.img2{
+    width: 400px;
+    height: 400px;
+    margin-left: 500px;
+
 }
 
 .title{
@@ -31,6 +38,41 @@ header{
     margin-bottom: 20px;
     color: white;
 }
+.title2{
+    font-style:italic;
+    font-size: 40px;
+}
+
+.title3{
+
+    font-style: italic;
+    font-size: 20px;
+    margin-top: 20px;
+}
+.title4{
+    font-size: 30px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+.title5{
+
+    font-style: italic;
+    font-size: 20px;
+}
+.title6{
+
+    font-size: 30px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+.title7{
+
+    font-style: italic;
+    font-size: 20px;
+}
+
 
 .menu{
     background: transparent;
@@ -53,14 +95,16 @@ header{
 .btn-try{
     display: inline-block;
     text-decoration: none;
-    width: 130px;
+    width: 120px;
     height: 40px;
     background-color: white;
     border-radius: 30px;
     padding: 10px;
     color: #667eea;
     font-weight: bold;
-    transition: .5s;
+    transition: .5s;    
+    margin: 150px 20px 80px;
+
 }
 
 .btn-try:hover{
@@ -97,7 +141,7 @@ header{
 
 .seccion2{
     background-color:#667eea;
-    height: 800px;
+    height: 700px;
     position: relative;
     display: flex;
     justify-content: center;
