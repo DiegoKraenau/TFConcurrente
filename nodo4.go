@@ -1,26 +1,23 @@
 package main
 
 import (
-    "bufio"
-    "fmt"
-    "net"
-    "strings"
-    "strconv"
-    "flag"
-    "os"
-    "encoding/csv"
-    "io"
-    "math"
-    "net/http"
+	"bufio"
+	"encoding/csv"
+	"flag"
+	"fmt"
+	"io"
+	"math"
+	"net"
+	"net/http"
+	"os"
+	"strconv"
+	"strings"
 )
 
-
 type LinearRegression struct {
-	x, y []float64
-	xTotal, yTotal, xSqTotal, xYTotal, numerator, denominator,
-	yInt float64
+	x, y                                                                     []float64
+	xTotal, yTotal, xSqTotal, xYTotal, numerator, denominator, yIntNumerator float64
 }
-
 
 func leerCSV(c chan []float64) {
 
@@ -71,12 +68,9 @@ func leerCSV(c chan []float64) {
 
 }
 
-func (l *LinearRegression) ReturnEcuacionParts(c chan []float64,num int) {
-
+func (l *LinearRegression) ReturnEcuacionParts(c chan []float64, num int) {
 
 	l.LinearRegressionInit(c)
-
-
 
 }
 
@@ -92,12 +86,9 @@ func (l *LinearRegression) LinearRegressionInit(c chan []float64) {
 		l.xYTotal = l.xYTotal + (l.x[i] * l.y[i])
 	}
 
-	l.numerator = (float64(len(l.x)) * l.xYTotal) - (l.xTotal * l.yTotal)
-
+	l.yIntNumerator = (l.yTotal * l.xSqTotal) - (l.xTotal * l.xYTotal)
 
 }
-
-
 
 func DescargarArchivo(filepath string, url string) error {
 
@@ -120,46 +111,41 @@ func DescargarArchivo(filepath string, url string) error {
 	return err
 }
 
-
 var remotehost string
 
 func main() {
 
-    hostname := fmt.Sprintf("localhost:%s", "9001")
+	hostname := fmt.Sprintf("localhost:%s", "9004")
 
+	remotehost = fmt.Sprintf("localhost:%s", "9005")
 
-    remotehost = fmt.Sprintf("localhost:%s", "9005")
-
-    // Listener!
-    ln, _ := net.Listen("tcp", hostname)
-    defer ln.Close()
-    for {
-        conn, _ := ln.Accept()
-        go handle(conn)
-    }
+	// Listener!
+	ln, _ := net.Listen("tcp", hostname)
+	defer ln.Close()
+	for {
+		conn, _ := ln.Accept()
+		go handle(conn)
+	}
 }
 
 func handle(conn net.Conn) {
-    defer conn.Close()
-    r := bufio.NewReader(conn)
-    str, _ := r.ReadString('\n')
-    num, _ := strconv.Atoi(strings.TrimSpace(str))
-    //Aqui va la logica
-    ch := make(chan []float64, 2)
+	defer conn.Close()
+	r := bufio.NewReader(conn)
+	str, _ := r.ReadString('\n')
+	num, _ := strconv.Atoi(strings.TrimSpace(str))
+	//Aqui va la logica
+	ch := make(chan []float64, 2)
+	leerCSV(ch)
 
-    leerCSV(ch)
-    
-    var partEcuation LinearRegression
-    partEcuation.ReturnEcuacionParts(ch,num)
-    send(partEcuation.numerator)//El primer nodo retorna la primera parte de la ecuacion general
+	var partEcuacion LinearRegression
+	partEcuacion.ReturnEcuacionParts(ch, num)
+	send(partEcuacion.yTotal/float64(len(partEcuacion.x))) //El cuarto nodo retorna la cuarta parte de la ecuacion general
 
 }
 
 func send(num float64) {
-    conn, _ := net.Dial("tcp", remotehost)
-    defer conn.Close()
-    fmt.Print(num)
-    fmt.Fprintf(conn, "%7.5f",num)
+	conn, _ := net.Dial("tcp", remotehost)
+	defer conn.Close()
+	fmt.Print(num)
+	fmt.Fprintf(conn, "%7.5f", num)
 }
-
-

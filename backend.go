@@ -22,6 +22,7 @@ type Ecuacion struct {
 	M   float64  `json:"M"`
 	B   float64  `json:"B"`
 	MathScore   int  `json:"MathScore"`
+	PromedioWritingScore   float64  `json:"PromedioWritingScore"`
 	Forma string `json:"Forma"`
 	Prediccion   float64  `json:"PrediccionDeWritingScore"`
 }
@@ -76,7 +77,7 @@ func homePage(res http.ResponseWriter, r *http.Request) {
 
 	
 	numero=variable.Mathscore
-	fmt.Print(variable.Mathscore)
+	fmt.Println(variable.Mathscore)
 	remotehost = fmt.Sprintf("localhost:%s", "9001") //Envia la informacion al primer nodo
 	send(numero,res)
 	
@@ -89,12 +90,18 @@ func homePage(res http.ResponseWriter, r *http.Request) {
 	remotehost = fmt.Sprintf("localhost:%s", "9003") //Envia la informacion al tercer nodo
 	send(numero,res)
 
+	numero=variable.Mathscore
+	remotehost = fmt.Sprintf("localhost:%s", "9004") //Envia la informacion al cuarto nodo
+	send(numero,res)
+
+
 
 	ecuacion.B=variablesRecibidas[0]/variablesRecibidas[1]
 	ecuacion.M=variablesRecibidas[2]/variablesRecibidas[1]
 	ecuacion.MathScore=numero
 	bforma := fmt.Sprintf("%f", ecuacion.B) 
 	mforma := fmt.Sprintf("%f", ecuacion.M) 
+	ecuacion.PromedioWritingScore=variablesRecibidas[3]
 	ecuacion.Forma=bforma+" X + "+mforma
 	ecuacion.Prediccion=ecuacion.B*float64(numero)+ecuacion.M
 	jsonBytes, _ := json.MarshalIndent(ecuacion, "", " ")
@@ -143,6 +150,16 @@ func query(res http.ResponseWriter, r *http.Request) {
 	remotehost = fmt.Sprintf("localhost:%s", "9003") //Envia la informacion al tercer nodo
 	send(numero,res)
 
+	numero, err = strconv.Atoi(mathScore)
+	if err == nil {
+		fmt.Println(numero)
+	}
+
+	
+	remotehost = fmt.Sprintf("localhost:%s", "9004") //Envia la informacion al cuarto nodo
+	send(numero,res)
+
+
 
 	ecuacion.B=variablesRecibidas[0]/variablesRecibidas[1]
 	ecuacion.M=variablesRecibidas[2]/variablesRecibidas[1]
@@ -151,6 +168,7 @@ func query(res http.ResponseWriter, r *http.Request) {
 	mforma := fmt.Sprintf("%f", ecuacion.M) 
 	ecuacion.Forma=bforma+" X + "+mforma
 	ecuacion.Prediccion=ecuacion.B*float64(numero)+ecuacion.M
+	ecuacion.PromedioWritingScore=variablesRecibidas[3]
 	jsonBytes, _ := json.MarshalIndent(ecuacion, "", " ")
 	io.WriteString(res, string(jsonBytes))
 	
@@ -173,7 +191,7 @@ func send(num int,res http.ResponseWriter) {
 	
 
 
-	hostname := fmt.Sprintf("localhost:%s", "9004")
+	hostname := fmt.Sprintf("localhost:%s", "9005")
 	ln, _ := net.Listen("tcp", hostname)
     defer ln.Close()
     conn, _ = ln.Accept()

@@ -1,4 +1,5 @@
 
+
 body{
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     background: #fff;
@@ -11,7 +12,7 @@ html{
 
 header{
     width: 100%;
-    height: 110vh;
+    height: 100vh;
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2af 100%);
     text-align: center;
     overflow: hidden;
@@ -21,15 +22,7 @@ header{
 
 .img{
     width: 400px;
-    height: 400px;
-    margin-top: 60px;
-
-}
-.img2{
-    width: 400px;
-    height: 400px;
-    margin-left: 500px;
-
+    margin-top: 200px;
 }
 
 .title{
@@ -38,41 +31,6 @@ header{
     margin-bottom: 20px;
     color: white;
 }
-.title2{
-    font-style:italic;
-    font-size: 40px;
-}
-
-.title3{
-
-    font-style: italic;
-    font-size: 20px;
-    margin-top: 20px;
-}
-.title4{
-    font-size: 30px;
-    padding: 20px;
-    margin-bottom: 20px;
-    color: white;
-}
-.title5{
-
-    font-style: italic;
-    font-size: 20px;
-}
-.title6{
-
-    font-size: 30px;
-    padding: 20px;
-    margin-bottom: 20px;
-    color: white;
-}
-.title7{
-
-    font-style: italic;
-    font-size: 20px;
-}
-
 
 .menu{
     background: transparent;
@@ -95,16 +53,14 @@ header{
 .btn-try{
     display: inline-block;
     text-decoration: none;
-    width: 120px;
+    width: 130px;
     height: 40px;
     background-color: white;
     border-radius: 30px;
     padding: 10px;
     color: #667eea;
     font-weight: bold;
-    transition: .5s;    
-    margin: 150px 20px 80px;
-
+    transition: .5s;
 }
 
 .btn-try:hover{
@@ -135,13 +91,14 @@ header{
 
 .seccion1{
     background-color:hsl(270, 76%, 80%);
-    height: 800px;
+    height: 1000px;
     position: relative;
+    text-align: center;
 }
 
 .seccion2{
     background-color:#667eea;
-    height: 700px;
+    height: 800px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -202,7 +159,7 @@ input[type="submit"]:hover{
 
 .respuestas{
     width: 65%;
-    height: 220px;
+    height: 250px;
     border-radius: 10px;
     background-color: white;
     text-align: center;
@@ -216,3 +173,28 @@ input[type="submit"]:hover{
     margin: 10px 0;
 }
 
+.content{
+    color: #333333;
+    font-size: 15px;
+}
+
+.img2{
+    width: 50%;
+    height: 500px;
+    margin: 60px auto;
+ 
+ }
+
+ .imagen{
+     width: 100%;
+     height: 100%;
+     border-radius: 30px;
+ }
+
+ .content-sub{
+     width: 50%;
+     height: 30px;
+     margin: 10px auto;
+     text-align: justify;
+     margin-bottom: 10px;
+ }
