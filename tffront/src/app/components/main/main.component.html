@@ -1,0 +1,53 @@
+
+<body>
+    <app-spinner></app-spinner>
+    <header>
+        <nav class=" menu">
+    <a href="#sec1" class="">Introducción</a>
+    </nav>
+    <img class="img" src="../../../assets/img/code.svg">
+    <h1 class="title">Trabajo Final de Programación Concurrente y Distribuida</h1>
+    <a href="#sec2" class="btn-try">Probar</a>
+
+    <div class="absolute" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+            <path d="M-30.34,-26.97 C150.00,150.00 349.21,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none; fill:  hsl(270, 76%, 80%);"></path>
+        </svg>
+    </div>
+    </header>
+    <div id="sec1" class="seccion1">
+
+        <div class="absolute2" style="height: 150px; overflow: hidden;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path d="M-30.34,-26.97 C150.00,150.00 349.21,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #667eea;"></path>
+            </svg>
+        </div>
+    </div>
+    <div id="sec2" class="seccion2">
+        <div class="arreglo">
+            <div class="formulario-container">
+                <form action="">
+                    <h2>Formulario</h2>
+                    <input type="number"  placeholder="Ingrese MathScore" required [(ngModel)]="variable.Mathscore" name="Mathscore">
+                    <input type="submit" value="Enviar" (click)="doFormula()">
+                </form>
+                
+            </div>
+        </div>
+   
+        <div class="arreglo2" *ngIf="procesado">
+            <div class="respuestas">
+                <h2>Respuestas</h2>
+                <p>B: {{this.formula.B}}</p>
+                <p>M: {{this.formula.M}}</p>
+                <p>MathScore: {{this.formula.MathScore}}</p>
+                <p>Ecuación: {{this.formula.Forma}}</p>
+                <p>Prediccion de WritingScore: {{this.formula.PrediccionDeWritingScore}}</p>
+            </div>
+        </div>
+
+        
+    </div>
+</body>
